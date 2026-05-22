@@ -1,0 +1,131 @@
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.hero-content {
+  flex: 1;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.hero-content h2 {
+  font-size: 1.5rem;
+  color: var(--highlight-detail);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--highlight-detail);
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background-color: var(--highlight-detail);
+  color: #18230F; /* Always dark for contrast */
+}
+
+.primary-btn:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.secondary-btn {
+  border: 2px solid var(--highlight-detail);
+  color: var(--text-primary);
+}
+
+.secondary-btn:hover {
+  background-color: var(--accent-surface);
+  transform: translateY(-3px);
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-placeholder {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-surface), var(--bg-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 40px var(--shadow-color);
+  color: var(--text-primary);
+  font-weight: bold;
+  font-size: 1.5rem;
+  border: 8px solid var(--bg-primary);
+}
+
+/* Typing animation */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--highlight-detail); }
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-top: 120px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-content h2 {
+    font-size: 1.2rem;
+    white-space: normal;
+    border-right: none;
+    animation: none;
+  }
+}

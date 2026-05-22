@@ -1,0 +1,43 @@
+:root {
+  /* Light Mode Palette */
+  --bg-primary: #ECFAE5;
+  --bg-secondary: #DDF6D2;
+  --accent-surface: #CAE8BD;
+  --highlight-detail: #B0DB9C;
+  --text-primary: #18230F; 
+  --shadow-color: rgba(176, 219, 156, 0.4);
+}
+
+[data-theme="dark"] {
+  /* Dark Mode Palette */
+  --bg-primary: #18230F;
+  --bg-secondary: #27391C;
+  --accent-surface: #255F38;
+  --highlight-detail: #1F7D53;
+  --text-primary: #ECFAE5;
+  --shadow-color: rgba(31, 125, 83, 0.4);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Base utility classes for typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+/* Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}

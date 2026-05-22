@@ -1,0 +1,82 @@
+.liquid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.liquid-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.blobs-container {
+  width: 100%;
+  height: 100%;
+  filter: url(#liquid-mercury);
+  position: relative;
+}
+
+.blob {
+  position: absolute;
+  background: linear-gradient(135deg, #1F7D53, #18230F, #ECFAE5);
+  background-size: 200% 200%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.liquid-overlay.active .blob {
+  transform: translate(-50%, -50%) scale(2.5);
+}
+
+/* Dark mode mercury look */
+[data-theme="dark"] .blob {
+  background: linear-gradient(135deg, #1F7D53, #255F38, #18230F);
+  box-shadow: inset 0 0 50px rgba(236, 250, 229, 0.1);
+}
+
+/* Custom Bezier for fluid motion */
+.fluid-motion {
+  transition-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.transition-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  text-align: center;
+  pointer-events: none;
+}
+
+.transition-text {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  color: #ECFAE5;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  margin: 0;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.liquid-overlay.active .transition-text {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-delay: 0.2s;
+}
+
+[data-theme="dark"] .transition-text {
+  color: #ECFAE5;
+  text-shadow: 0 0 20px rgba(236, 250, 229, 0.4);
+}
