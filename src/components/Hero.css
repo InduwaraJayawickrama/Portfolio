@@ -3,6 +3,8 @@
   display: flex;
   align-items: center;
   padding-top: 80px;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-container {
@@ -10,6 +12,18 @@
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-content {
@@ -55,7 +69,8 @@
 
 .primary-btn {
   background-color: var(--highlight-detail);
-  color: #18230F; /* Always dark for contrast */
+  color: #18230F;
+  /* Always dark for contrast */
 }
 
 .primary-btn:hover {
@@ -94,38 +109,93 @@
   font-weight: bold;
   font-size: 1.5rem;
   border: 8px solid var(--bg-primary);
+  overflow: hidden;
+}
+
+.hero-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-placeholder:hover .hero-portrait {
+  transform: scale(1.05);
 }
 
 /* Typing animation */
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
 }
 
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--highlight-detail); }
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: var(--highlight-detail);
+  }
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 3rem;
+  }
+
   .hero-container {
     flex-direction: column-reverse;
     text-align: center;
-    padding-top: 120px;
+    gap: 2rem;
   }
 
   .hero-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-buttons {
-    justify-content: center;
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.2;
   }
 
   .hero-content h2 {
-    font-size: 1.2rem;
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
     white-space: normal;
     border-right: none;
     animation: none;
+    margin-bottom: 1rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.7rem 1.5rem;
+    text-align: center;
+  }
+
+  .image-placeholder {
+    width: 220px;
+    height: 220px;
+    font-size: 1.2rem;
+    border-width: 5px;
   }
 }

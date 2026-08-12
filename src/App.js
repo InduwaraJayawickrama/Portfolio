@@ -3,10 +3,14 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Stats from './components/Stats';
+import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Credentials from './components/Credentials';
 import Volunteering from './components/Volunteering';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 import LiquidTransition from './components/LiquidTransition';
 
 function App() {
@@ -28,17 +32,23 @@ function App() {
 
     // Elastic title distortion
     const handleMouseMove = (e) => {
-      const titles = document.querySelectorAll('.section-title, .hero-content h1');
+      const titles = document.querySelectorAll('.section-title');
       titles.forEach(title => {
         const rect = title.getBoundingClientRect();
         const x = e.clientX - (rect.left + rect.width / 2);
         const y = e.clientY - (rect.top + rect.height / 2);
-        
-        const dist = Math.sqrt(x*x + y*y);
+
+        const dist = Math.sqrt(x * x + y * y);
         if (dist < 400) {
           const force = (400 - dist) / 400;
-          title.style.transform = `translate(${x * 0.1 * force}px, ${y * 0.1 * force}px) skew(${x * 0.02 * force}deg, ${y * 0.02 * force}deg)`;
-          title.style.textShadow = `${-x * 0.05 * force}px ${-y * 0.05 * force}px 10px var(--shadow-color)`;
+          // Reduce the distortion effect specifically for the Contact Me section title
+          const isContact = title.closest('.contact-section') !== null;
+          const translateScale = isContact ? 0.02 : 0.1;
+          const skewScale = isContact ? 0.004 : 0.02;
+          const shadowScale = isContact ? 0.01 : 0.05;
+
+          title.style.transform = `translate(${x * translateScale * force}px, ${y * translateScale * force}px) skew(${x * skewScale * force}deg, ${y * skewScale * force}deg)`;
+          title.style.textShadow = `${-x * shadowScale * force}px ${-y * shadowScale * force}px 10px var(--shadow-color)`;
         } else {
           title.style.transform = '';
           title.style.textShadow = '';
@@ -51,7 +61,7 @@ function App() {
       if (anchor && anchor.hash && anchor.hash.startsWith('#')) {
         e.preventDefault();
         const id = anchor.hash.slice(1);
-        const name = anchor.innerText || anchor.textContent || id;
+        const name = anchor.getAttribute('data-nav-name') || anchor.innerText || anchor.textContent || id;
         handleNavClick(id, name);
       }
     };
@@ -60,7 +70,7 @@ function App() {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('click', handleGlobalClick);
     handleScrollReveal();
-    
+
     return () => {
       window.removeEventListener('scroll', handleScrollReveal);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -88,18 +98,14 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Stats />
+      <Experience />
       <Skills />
       <Projects />
+      <Credentials />
       <Volunteering />
       <Contact />
-      
-      <footer style={{ padding: '2rem 0', background: 'var(--bg-secondary)', marginTop: 'auto' }}>
-        <div className="container">
-          <p style={{ color: 'var(--text-primary)', opacity: 0.8 }}>
-            &copy; {new Date().getFullYear()} Induwara Jayawickrama. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
